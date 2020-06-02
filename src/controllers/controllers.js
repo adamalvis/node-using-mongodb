@@ -34,3 +34,23 @@ export const getProductWithID = (req, res) => {
     return res.json(Product);
   });
 };
+
+export const updateProduct = (req, res) => {
+  Product.findOneAndUpdate({ _id: req.params.ProductID }, req.body, { new: true, useFindAndModify: false }, (err, Product) => {
+    if (err) {
+      return res.send(err);
+    }
+
+    return res.json(Product);
+  });
+};
+
+export const deleteProduct = (req, res) => {
+  Product.deleteOne({ _id: req.params.ProductID}, (err, Product) => {
+    if (err) {
+      return res.send(err);
+    }
+
+    return res.json({ message: 'successfully deleted product' });
+  });
+};
